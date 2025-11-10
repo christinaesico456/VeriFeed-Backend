@@ -204,48 +204,44 @@ class AddReviewView(CreateView):
         return super().form_valid(form)
 
 # Consistent authentication for feedback
-@api_view(['GET', 'POST'])
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
 def submit_feedback(request):
-    if request.method == 'GET':
-        # GET is public - anyone can view feedback
-        qs = Feedback.objects.select_related('user').order_by('-created_at')
-        serializer = FeedbackSerializer(qs, many=True, context={'request': request})
-        return Response(serializer.data)
-    
-    if request.method == 'POST':
-        # POST requires authentication
-        if not request.user.is_authenticated:
-            return Response(
-                {"error": "Authentication required to submit feedback"},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
-        
-        serializer = FeedbackSerializer(data=request.data)
+    """Allow users to submit multiple feedback entries."""
+    try:
+        serializer = FeedbackSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({
+                "message": "Feedback submitted successfully!",
+                "feedback": serializer.data
+            }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @authentication_classes([JWTAuthentication]) 
 @permission_classes([IsAuthenticated])
 def quick_review(request):
-    """Main quick review endpoint - matches frontend API call"""
+    """Main quick review endpoint - allow multiple submissions"""
     print(f"🔍 quick_review called by: {request.user}")
     print(f"🔍 Authenticated: {request.user.is_authenticated}")
     print(f"🔍 Data: {request.data}")
-    
+
     try:
         data = request.data.copy()
-        
+
         # Handle field mapping
         if 'message' in data and not data.get('comment'):
             data['comment'] = data['message']
-        
+
+        # Default service name
         if not data.get('service_name'):
             data['service_name'] = 'General'
-        
-        # Create review directly 
+
+        # ✅ Always create a new review (no duplicate blocking)
         review = Review.objects.create(
             user=request.user,
             service_name=data.get('service_name', 'General'),
@@ -253,24 +249,25 @@ def quick_review(request):
             comment=data.get('comment', ''),
             title=data.get('title', '')
         )
-        
+
         return Response({
-            'message': 'Review submitted successfully',
-            'review': {
-                'id': review.id,
-                'service_name': review.service_name,
-                'rating': review.rating,
-                'comment': review.comment,
-                'user': request.user.username,
-                'created_at': review.created_at
+            "message": "Review submitted successfully",
+            "review": {
+                "id": review.id,
+                "service_name": review.service_name,
+                "rating": review.rating,
+                "comment": review.comment,
+                "user": request.user.username,
+                "created_at": review.created_at,
             }
         }, status=status.HTTP_201_CREATED)
-        
+
     except Exception as e:
         print(f"🔴 Error in quick_review: {str(e)}")
         return Response({
-            'error': str(e)
+            "error": str(e)
         }, status=status.HTTP_400_BAD_REQUEST)
+
 
 @api_view(["GET"])
 @permission_classes([AllowAny])

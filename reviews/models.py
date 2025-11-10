@@ -22,8 +22,6 @@ class Review(models.Model):
     
     class Meta:
         ordering = ['-created_at']
-        unique_together = ['service_name', 'user']  # One review per user per service
-    
     def __str__(self):
          return f"{self.user.username} - {self.comment[:20]}"
     

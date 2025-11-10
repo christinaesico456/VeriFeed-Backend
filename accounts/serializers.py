@@ -1,3 +1,5 @@
+from django.utils import timezone
+from datetime import date
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
@@ -32,6 +34,11 @@ class UserSerializer(serializers.ModelSerializer):
             validate_password(value)
         except ValidationError as e:
             raise serializers.ValidationError(list(e.messages))
+        return value
+    
+    def validate_birthday(self, value):
+        if value and value > timezone.now().date():
+            raise serializers.ValidationError("Birthday cannot be in the future.")
         return value
 
     def validate(self, data):

@@ -1,0 +1,301 @@
+Watching for file changes with StatReloader
+C:\VeriFeedBackend\VeriFeed\accounts\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday', 'profile_picture']
+Internal Server Error: /api/accounts/register/
+Traceback (most recent call last):
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\django\views\generic\base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\VeriFeedBackend\VeriFeed\accounts\views.py", line 26, in register_user
+    if serializer.is_valid():
+       ~~~~~~~~~~~~~~~~~~~^^
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\serializers.py", line 444, in run_validation
+    value = self.to_internal_value(data)
+  File "C:\VeriFeedBackend\VeriFeed\.venv\Lib\site-packages\rest_framework\serializers.py", line 503, in to_internal_value
+    validated_value = validate_method(validated_value)
+  File "C:\VeriFeedBackend\VeriFeed\accounts\serializers.py", line 39, in validate_birthday
+    if value and value > timezone.now().date():
+                         ^^^^^^^^^^^^
+AttributeError: 'int' object has no attribute 'now'
+C:\VeriFeedBackend\VeriFeed\accounts\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday', 'profile_picture']
+Registration validation failed: {'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+Bad Request: /api/accounts/register/
+Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday', 'profile_picture']
+User esico_nina registered successfully
+OTP request received: skyesico@gmail.com
+OTP email sent successfully to skyesico@gmail.com for signup
+OTP generated and sent to skyesico@gmail.com
+OTP resend request: skyesico@gmail.com
+OTP email sent successfully to skyesico@gmail.com for signup
+OTP resent to skyesico@gmail.com
+C:\VeriFeedBackend\VeriFeed\LandingPage\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\VeriFeedBackend\VeriFeed\accounts\email_utils.py changed, reloading.
+Watching for file changes with StatReloader
+Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday', 'profile_picture']
+Registration validation failed: {'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+Bad Request: /api/accounts/register/
+Not Found: /favicon.ico
+Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday', 'profile_picture']
+User esico_nina8 registered successfully
+OTP request received: christinaesico456@gmail.com
+OTP generated and sent to christinaesico456@gmail.com
+OTP verification attempt: christinaesico456@gmail.com
+OTP verified successfully for esico_nina8
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/accounts/logout/
+OTP request received: esico_nina8
+OTP generated and sent to christinaesico456@gmail.com
+OTP request received: esico_nina8
+OTP generated and sent to christinaesico456@gmail.com
+OTP verification attempt: esico_nina8
+OTP verification failed: {'non_field_errors': [ErrorDetail(string='Invalid OTP code. 4 attempts remaining.', code='invalid')]}
+Bad Request: /api/accounts/verify-otp/
+OTP verification attempt: esico_nina8
+OTP verification failed: {'non_field_errors': [ErrorDetail(string='Invalid OTP code. 3 attempts remaining.', code='invalid')]}
+Bad Request: /api/accounts/verify-otp/
+OTP resend request: esico_nina8
+OTP resent to christinaesico456@gmail.com
+OTP verification attempt: esico_nina8
+OTP verification failed: {'non_field_errors': [ErrorDetail(string='Invalid OTP code. 4 attempts remaining.', code='invalid')]}
+Bad Request: /api/accounts/verify-otp/
+C:\VeriFeedBackend\VeriFeed\accounts\email_utils.py changed, reloading.
+Watching for file changes with StatReloader
+C:\VeriFeedBackend\VeriFeed\LandingPage\settings.py changed, reloading.
+C:\VeriFeedBackend\VeriFeed\LandingPage\settings.py changed, reloading.
+INFO 2025-11-07 09:28:34,676 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 09:28:34,913 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 09:31:33,655 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+INFO 2025-11-07 09:31:36,257 views User nina.esico08 registered successfully
+INFO 2025-11-07 09:31:36,269 otp_views OTP request received: aninesico@gmail.com
+INFO 2025-11-07 09:31:43,715 otp_views OTP generated and sent to aninesico@gmail.com
+INFO 2025-11-07 09:32:36,122 otp_views OTP verification attempt: aninesico@gmail.com
+INFO 2025-11-07 09:32:40,293 otp_views OTP verified successfully for nina.esico08
+INFO 2025-11-07 09:33:35,936 otp_views OTP request received: nina.esico08
+INFO 2025-11-07 09:33:41,862 otp_views OTP generated and sent to aninesico@gmail.com
+INFO 2025-11-07 09:34:02,150 otp_views OTP verification attempt: nina.esico08
+INFO 2025-11-07 09:34:06,447 otp_views OTP verified successfully for nina.esico08
+INFO 2025-11-07 09:40:17,591 autoreload C:\VeriFeedBackend\VeriFeed\accounts\email_utils.py changed, reloading.
+INFO 2025-11-07 09:40:23,282 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 09:40:31,379 autoreload C:\VeriFeedBackend\VeriFeed\accounts\email_utils.py changed, reloading.
+INFO 2025-11-07 09:40:32,682 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-07 09:41:36,164 log Not Found: /favicon.ico
+INFO 2025-11-07 09:46:06,196 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+INFO 2025-11-07 09:46:08,799 views User skyesico456 registered successfully
+INFO 2025-11-07 09:46:08,818 otp_views OTP request received: skyesico@gmail.com
+INFO 2025-11-07 09:46:16,604 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 09:46:16,638 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 09:46:16,641 log Bad Request: /api/accounts/register/
+INFO 2025-11-07 09:46:19,283 otp_views OTP generated and sent to skyesico@gmail.com
+INFO 2025-11-07 09:47:31,302 otp_views OTP verification attempt: skyesico@gmail.com
+INFO 2025-11-07 09:47:36,280 otp_views OTP verified successfully for skyesico456
+INFO 2025-11-07 09:54:57,984 autoreload C:\VeriFeedBackend\VeriFeed\accounts\email_utils.py changed, reloading.
+INFO 2025-11-07 09:54:59,198 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 09:58:25,029 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+INFO 2025-11-07 09:58:27,214 views User vhelvet_vhea registered successfully
+INFO 2025-11-07 09:58:27,224 otp_views OTP request received: angel.vhea014@gmail.com
+INFO 2025-11-07 09:58:37,177 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 09:58:37,217 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 09:58:37,223 log Bad Request: /api/accounts/register/
+ERROR 2025-11-07 09:58:40,738 otp_views Failed to send OTP email to angel.vhea014@gmail.com
+ERROR 2025-11-07 09:58:40,740 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 09:59:51,694 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 09:59:51,716 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 09:59:51,718 log Bad Request: /api/accounts/register/
+INFO 2025-11-07 09:59:55,314 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 09:59:55,345 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 09:59:55,348 log Bad Request: /api/accounts/register/
+INFO 2025-11-07 09:59:56,802 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 09:59:56,823 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 09:59:56,824 log Bad Request: /api/accounts/register/
+INFO 2025-11-07 10:03:49,228 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+INFO 2025-11-07 10:03:50,870 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+INFO 2025-11-07 10:03:51,452 views User weyganda registered successfully
+INFO 2025-11-07 10:03:51,461 otp_views OTP request received: princessdestura05@gmail.com
+INFO 2025-11-07 10:03:52,613 views Registration attempt with data keys: ['full_name', 'username', 'email', 'password', 'confirm_password', 'birthday']
+ERROR 2025-11-07 10:03:52,645 views Registration validation failed: {'username': [ErrorDetail(string='A user with that username already exists.', code='unique')], 'email': [ErrorDetail(string='user with this email already exists.', code='unique')]}
+WARNING 2025-11-07 10:03:52,647 log Bad Request: /api/accounts/register/
+ERROR 2025-11-07 10:03:53,320 views Database integrity error during registration: (1062, "Duplicate entry 'weyganda' for key 'accounts_customuser.username'")
+WARNING 2025-11-07 10:03:53,322 log Bad Request: /api/accounts/register/
+INFO 2025-11-07 10:04:00,753 otp_views OTP generated and sent to princessdestura05@gmail.com
+INFO 2025-11-07 10:05:20,473 otp_views OTP verification attempt: princessdestura05@gmail.com
+INFO 2025-11-07 10:05:25,445 otp_views OTP verified successfully for weyganda
+INFO 2025-11-07 10:12:47,882 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 10:12:49,825 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 10:12:49,827 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 10:12:58,505 otp_views OTP request received: nina.esico08
+INFO 2025-11-07 10:13:04,993 otp_views OTP generated and sent to aninesico@gmail.com
+INFO 2025-11-07 10:17:56,409 otp_views OTP request received: nina.esico08
+INFO 2025-11-07 10:18:03,692 otp_views OTP generated and sent to aninesico@gmail.com
+INFO 2025-11-07 10:19:12,166 otp_views OTP verification attempt: nina.esico08
+INFO 2025-11-07 10:19:18,054 otp_views OTP verified successfully for nina.esico08
+INFO 2025-11-07 12:10:32,555 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 12:29:50,641 otp_views OTP request received: nina.eaico456@gmail.com
+ERROR 2025-11-07 12:30:04,003 otp_views Failed to send OTP email to nina.eaico456@gmail.com
+ERROR 2025-11-07 12:30:04,009 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 12:30:07,866 otp_views OTP request received: nina.eaico456@gmail.com
+ERROR 2025-11-07 12:30:20,335 otp_views Failed to send OTP email to nina.eaico456@gmail.com
+ERROR 2025-11-07 12:30:20,337 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 12:30:44,442 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 12:30:55,819 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 12:30:55,821 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 12:32:57,835 otp_views OTP request received: nina.esico08
+INFO 2025-11-07 12:33:06,992 otp_views OTP generated and sent to aninesico@gmail.com
+INFO 2025-11-07 12:36:35,170 otp_views OTP verification attempt: nina.esico08
+INFO 2025-11-07 12:36:39,788 otp_views OTP verified successfully for nina.esico08
+INFO 2025-11-07 12:37:37,174 views Profile update for nina.esico08 with data: ['profile_picture']
+INFO 2025-11-07 12:37:38,310 views Profile updated successfully for nina.esico08
+INFO 2025-11-07 14:12:03,113 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:12:05,163 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:12:05,169 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:12:23,794 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:12:25,966 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:12:25,968 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:12:28,683 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:12:30,706 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:12:30,709 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:13:34,115 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:13:36,089 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:13:36,091 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:14:07,852 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:14:09,858 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:14:09,860 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:14:21,387 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:14:23,448 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:14:23,450 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:15:15,935 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 14:15:38,608 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:15:40,715 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:15:40,717 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:16:19,978 otp_views OTP request received: weyganda
+ERROR 2025-11-07 14:16:22,111 otp_views Failed to send OTP email to princessdestura05@gmail.com
+ERROR 2025-11-07 14:16:22,116 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:16:55,918 otp_views OTP request received: weyganda
+ERROR 2025-11-07 14:17:10,973 otp_views Failed to send OTP email to princessdestura05@gmail.com
+ERROR 2025-11-07 14:17:10,976 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:17:32,372 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:17:34,444 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:17:34,446 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:17:37,891 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:17:52,087 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:17:52,089 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:18:18,776 otp_views OTP request received: nina.esico08
+INFO 2025-11-07 14:18:23,371 otp_views OTP request received: nina.esico08
+ERROR 2025-11-07 14:18:31,693 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:18:31,696 log Internal Server Error: /api/accounts/request-otp/
+ERROR 2025-11-07 14:18:35,968 otp_views Failed to send OTP email to aninesico@gmail.com
+ERROR 2025-11-07 14:18:35,969 log Internal Server Error: /api/accounts/request-otp/
+INFO 2025-11-07 14:19:57,496 otp_views OTP request received: skyesico456
+ERROR 2025-11-07 14:19:59,596 otp_views OTP request validation failed: {'non_field_errors': [ErrorDetail(string='Invalid credentials', code='invalid')]}
+WARNING 2025-11-07 14:19:59,598 log Bad Request: /api/accounts/request-otp/
+INFO 2025-11-07 14:20:48,743 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 14:22:08,211 otp_views OTP request received: christina456
+INFO 2025-11-07 14:22:14,738 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-07 14:22:30,051 otp_views OTP verification attempt: christina456
+INFO 2025-11-07 14:22:39,875 otp_views OTP verified successfully for christina456
+WARNING 2025-11-07 14:23:23,826 log Bad Request: /api/quick-review/
+INFO 2025-11-07 14:25:28,449 views Profile picture removed for christina456
+INFO 2025-11-07 14:29:59,985 otp_views OTP request received: christina456
+INFO 2025-11-07 14:30:07,687 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-07 14:30:53,393 otp_views OTP verification attempt: christina456
+INFO 2025-11-07 14:30:56,779 otp_views OTP verified successfully for christina456
+INFO 2025-11-07 14:31:26,928 views Profile update for christina456 with data: ['profile_picture']
+INFO 2025-11-07 14:31:27,292 views Profile updated successfully for christina456
+INFO 2025-11-07 21:24:30,560 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 21:24:39,117 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 21:25:10,754 otp_views OTP request received: christina456
+INFO 2025-11-07 21:25:16,430 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-07 21:25:33,309 otp_views OTP verification attempt: christina456
+INFO 2025-11-07 21:25:36,709 otp_views OTP verified successfully for christina456
+INFO 2025-11-07 21:25:49,258 views Profile update for christina456 with data: ['profile_picture']
+INFO 2025-11-07 21:25:49,570 views Profile updated successfully for christina456
+INFO 2025-11-07 21:26:09,669 views Profile picture removed for christina456
+WARNING 2025-11-07 21:26:43,542 log Bad Request: /api/quick-review/
+INFO 2025-11-07 21:29:23,767 views Profile picture removed for christina456
+INFO 2025-11-07 21:29:36,343 otp_views OTP request received: christina456
+INFO 2025-11-07 21:29:40,404 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-07 21:29:52,740 otp_views OTP verification attempt: christina456
+INFO 2025-11-07 21:29:55,987 otp_views OTP verified successfully for christina456
+INFO 2025-11-07 21:30:02,986 views Profile update for christina456 with data: ['profile_picture']
+INFO 2025-11-07 21:30:03,000 views Profile updated successfully for christina456
+INFO 2025-11-07 21:30:09,488 views Profile picture removed for christina456
+INFO 2025-11-07 21:36:55,191 autoreload C:\VeriFeedBackend\VeriFeed\accounts\views.py changed, reloading.
+INFO 2025-11-07 21:36:58,214 autoreload Watching for file changes with StatReloader
+INFO 2025-11-07 21:37:08,387 views Profile update for christina456 with data: ['profile_picture']
+INFO 2025-11-07 21:37:08,583 views Profile updated successfully for christina456
+INFO 2025-11-07 22:56:24,864 autoreload C:\VeriFeedBackend\VeriFeed\accounts\views.py changed, reloading.
+INFO 2025-11-07 22:56:27,581 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-07 23:13:39,199 log Unauthorized: /api/accounts/upload-profile-picture/
+INFO 2025-11-07 23:13:39,308 views Profile picture updated for christina456
+INFO 2025-11-07 23:49:29,029 views Profile picture removed for christina456
+INFO 2025-11-07 23:49:33,395 views Profile picture updated for christina456
+INFO 2025-11-10 16:50:41,595 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 16:51:04,900 otp_views OTP request received: christina456
+INFO 2025-11-10 16:51:10,141 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-10 16:52:24,791 otp_views OTP verification attempt: christina456
+INFO 2025-11-10 16:52:29,077 otp_views OTP verified successfully for christina456
+WARNING 2025-11-10 16:53:10,666 log Bad Request: /api/quick-review/
+INFO 2025-11-10 16:55:21,447 otp_views OTP request received: christina456
+INFO 2025-11-10 16:55:26,022 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-10 16:55:43,961 otp_views OTP verification attempt: christina456
+ERROR 2025-11-10 16:55:44,072 otp_views OTP verification failed: {'non_field_errors': [ErrorDetail(string='Invalid OTP code. 4 attempts remaining.', code='invalid')]}
+WARNING 2025-11-10 16:55:44,076 log Bad Request: /api/accounts/verify-otp/
+INFO 2025-11-10 16:56:13,831 otp_views OTP request received: christina456
+INFO 2025-11-10 16:56:17,892 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-10 16:56:51,651 otp_views OTP request received: christina456
+INFO 2025-11-10 16:56:55,494 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-10 17:17:47,099 autoreload C:\VeriFeedBackend\VeriFeed\accounts\otp_serializers.py changed, reloading.
+INFO 2025-11-10 17:17:48,637 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 17:17:55,423 autoreload C:\VeriFeedBackend\VeriFeed\accounts\views.py changed, reloading.
+INFO 2025-11-10 17:17:56,521 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 17:18:02,251 autoreload C:\VeriFeedBackend\VeriFeed\LandingPage\settings.py changed, reloading.
+INFO 2025-11-10 17:18:03,459 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 17:37:35,990 autoreload C:\VeriFeedBackend\VeriFeed\reviews\views.py changed, reloading.
+INFO 2025-11-10 17:37:38,253 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 17:37:43,397 otp_views OTP request received: christina456
+INFO 2025-11-10 17:37:48,077 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-10 17:37:58,339 otp_views OTP verification attempt: christina456
+INFO 2025-11-10 17:38:01,678 otp_views OTP verified successfully for christina456
+INFO 2025-11-10 17:40:49,470 autoreload C:\VeriFeedBackend\VeriFeed\reviews\views.py changed, reloading.
+INFO 2025-11-10 17:40:50,928 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-10 17:41:00,503 log Bad Request: /api/quick-review/
+INFO 2025-11-10 17:43:12,747 autoreload C:\VeriFeedBackend\VeriFeed\reviews\models.py changed, reloading.
+INFO 2025-11-10 17:43:13,810 autoreload Watching for file changes with StatReloader
+INFO 2025-11-10 17:43:17,492 autoreload C:\VeriFeedBackend\VeriFeed\reviews\views.py changed, reloading.
+INFO 2025-11-10 17:43:18,535 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-10 17:43:26,963 log Bad Request: /api/quick-review/
+INFO 2025-11-10 17:45:34,462 autoreload C:\VeriFeedBackend\VeriFeed\reviews\models.py changed, reloading.
+INFO 2025-11-10 17:45:36,244 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-10 17:45:44,162 log Bad Request: /api/quick-review/
+INFO 2025-11-10 17:49:08,662 autoreload C:\VeriFeedBackend\VeriFeed\reviews\models.py changed, reloading.
+INFO 2025-11-10 17:49:10,443 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-10 17:49:13,454 log Bad Request: /api/quick-review/
+WARNING 2025-11-10 17:49:29,163 log Bad Request: /api/quick-review/
+INFO 2025-11-10 17:50:08,828 autoreload C:\VeriFeedBackend\VeriFeed\reviews\views.py changed, reloading.
+INFO 2025-11-10 17:50:09,821 autoreload Watching for file changes with StatReloader
+WARNING 2025-11-10 17:50:11,514 log Bad Request: /api/quick-review/
+WARNING 2025-11-10 17:50:28,547 log Bad Request: /api/quick-review/

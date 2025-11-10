@@ -149,7 +149,7 @@ def upload_profile_picture(request):
         return Response({
             'error': 'No profile picture provided'
         }, status=status.HTTP_400_BAD_REQUEST)
-    
+
     profile_picture = request.FILES['profile_picture']
     
     # Validate file type
@@ -158,33 +158,55 @@ def upload_profile_picture(request):
         return Response({
             'error': 'Invalid file type. Please upload a JPEG, PNG, GIF, or WebP image.'
         }, status=status.HTTP_400_BAD_REQUEST)
-    
+
     # Validate file size (5MB limit)
     if profile_picture.size > 5 * 1024 * 1024:
         return Response({
             'error': 'File too large. Please upload an image smaller than 5MB.'
         }, status=status.HTTP_400_BAD_REQUEST)
-    
-    # Delete old profile picture if exists and not default
-    if (user.profile_picture and 
-        user.profile_picture.name != 'profile_pics/default.jpg'):
-        try:
-            user.profile_picture.delete(save=False)
-        except:
-            pass  # Ignore if file doesn't exist
-    
-    # Save new profile picture
-    user.profile_picture = profile_picture
-    user.save()
-    
-    profile_picture_url = request.build_absolute_uri(user.profile_picture.url)
-    
-    logger.info(f"Profile picture updated for {user.username}")
-    
-    return Response({
-        'message': 'Profile picture updated successfully.',
-        'profile_picture_url': profile_picture_url
-    })
+
+    try:
+        # Delete old profile picture if exists and not default
+        if (user.profile_picture and 
+            user.profile_picture.name != 'profile_pics/default.jpg'):
+            try:
+                # Delete the old file from storage
+                user.profile_picture.delete(save=False)
+            except Exception as e:
+                logger.warning(f"Failed to delete old profile picture: {e}")
+
+        # Save new profile picture
+        user.profile_picture = profile_picture
+        user.save()
+
+        # Build absolute URL for the new profile picture
+        profile_picture_url = request.build_absolute_uri(user.profile_picture.url)
+        
+        # Also update localStorage format
+        user_data = {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'profile_picture': profile_picture_url,
+            'birthday': user.birthday.isoformat() if user.birthday else None
+        }
+
+        logger.info(f"Profile picture updated for {user.username}")
+        
+        return Response({
+            'message': 'Profile picture updated successfully.',
+            'profile_picture_url': profile_picture_url,
+            'user': user_data  # ✅ Return complete user data
+        }, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        logger.error(f"Error uploading profile picture: {str(e)}")
+        return Response({
+            'error': 'Failed to upload profile picture. Please try again.'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['DELETE'])
 @permission_classes([IsAuthenticated])
@@ -192,21 +214,42 @@ def remove_profile_picture(request):
     """Remove user's profile picture and set to default"""
     user = request.user
     
-    # Delete current profile picture if not default
-    if (user.profile_picture and 
-        user.profile_picture.name != 'profile_pics/default.jpg'):
-        try:
-            user.profile_picture.delete(save=False)
-        except:
-            pass
-    
-    # Set to default
-    user.profile_picture = 'profile_pics/default.jpg'
-    user.save()
-    
-    logger.info(f"Profile picture removed for {user.username}")
-    
-    return Response({
-        'message': 'Profile picture removed successfully.',
-        'profile_picture_url': request.build_absolute_uri(user.profile_picture.url)
-    })
+    try:
+        # Delete current profile picture if not default
+        if (user.profile_picture and 
+            user.profile_picture.name != 'profile_pics/default.jpg'):
+            try:
+                user.profile_picture.delete(save=False)
+            except Exception as e:
+                logger.warning(f"Failed to delete profile picture: {e}")
+
+        # Set to default
+        user.profile_picture = 'profile_pics/default.jpg'
+        user.save()
+
+        profile_picture_url = request.build_absolute_uri(user.profile_picture.url)
+        
+        # Return updated user data
+        user_data = {
+            'id': user.id,
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'profile_picture': profile_picture_url,
+            'birthday': user.birthday.isoformat() if user.birthday else None
+        }
+
+        logger.info(f"Profile picture removed for {user.username}")
+        
+        return Response({
+            'message': 'Profile picture removed successfully.',
+            'profile_picture_url': profile_picture_url,
+            'user': user_data  # ✅ Return complete user data
+        }, status=status.HTTP_200_OK)
+        
+    except Exception as e:
+        logger.error(f"Error removing profile picture: {str(e)}")
+        return Response({
+            'error': 'Failed to remove profile picture. Please try again.'
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -15,6 +15,10 @@ pymysql.install_as_MySQLdb()
 import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv # type: ignore
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -234,3 +238,90 @@ if DEBUG:
     from django.urls import path, include
     
     # This will be added to your main urls.py
+
+# ========================================
+# EMAIL CONFIGURATION - Anti-Spam Optimized
+# ========================================
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+# Gmail SMTP settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'verifeedofficial@gmail.com'
+EMAIL_HOST_PASSWORD = 'uysb vmap ozax lrzv'  # App password
+
+# CRITICAL: Use consistent sender identity
+# Format: "Display Name <email@domain.com>"
+DEFAULT_FROM_EMAIL = 'VeriFeed Security <verifeedofficial@gmail.com>'
+
+# Server email (for error reports to admins)
+SERVER_EMAIL = 'verifeedofficial@gmail.com'
+
+# Prevent "On behalf of" in Gmail
+# This happens when EMAIL_HOST_USER differs from DEFAULT_FROM_EMAIL domain
+# Since we're using Gmail, they must match
+EMAIL_FROM_NAME = 'VeriFeed Security'
+
+# Email timeout settings (prevent hanging)
+EMAIL_TIMEOUT = 10
+
+# Optional: Subject prefix for automated emails
+# EMAIL_SUBJECT_PREFIX = '[VeriFeed] '  # Commented out - we handle subjects in code
+
+# Admin emails (for error notifications)
+ADMINS = [
+    ('VeriFeed Admin', 'verifeedofficial@gmail.com'),
+]
+
+# Additional anti-spam settings
+# Ensure consistent formatting
+EMAIL_USE_LOCALTIME = False  # Use UTC for consistency
+
+# ========================================
+# LOGGING CONFIGURATION
+# ========================================
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+            'formatter': 'verbose',
+        },
+        # Separate email log for debugging
+        'email_file': {
+            'class': 'logging.FileHandler',
+            'filename': 'email_debug.log',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'accounts': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.core.mail': {
+            'handlers': ['console', 'email_file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
