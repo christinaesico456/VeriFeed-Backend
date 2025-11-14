@@ -299,3 +299,8 @@ INFO 2025-11-10 17:50:08,828 autoreload C:\VeriFeedBackend\VeriFeed\reviews\view
 INFO 2025-11-10 17:50:09,821 autoreload Watching for file changes with StatReloader
 WARNING 2025-11-10 17:50:11,514 log Bad Request: /api/quick-review/
 WARNING 2025-11-10 17:50:28,547 log Bad Request: /api/quick-review/
+INFO 2025-11-14 09:57:11,628 autoreload Watching for file changes with StatReloader
+INFO 2025-11-14 09:57:59,619 otp_views OTP request received: christina456
+INFO 2025-11-14 09:58:06,953 otp_views OTP generated and sent to nina.eaico456@gmail.com
+INFO 2025-11-14 09:58:32,638 otp_views OTP verification attempt: christina456
+INFO 2025-11-14 09:58:38,343 otp_views OTP verified successfully for christina456
