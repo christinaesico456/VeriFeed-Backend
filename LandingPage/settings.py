@@ -1,6 +1,8 @@
 """
 Production Django settings for LandingPage project on Railway
 """
+from corsheaders.defaults import default_headers
+
 import pymysql
 pymysql.install_as_MySQLdb()
 
@@ -44,8 +46,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # MIDDLEWARE - WhiteNoise for static files
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Must be after SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,6 +70,7 @@ CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
     'authorization',
+    "access-control-allow-origin",
     'content-type',
     'dnt',
     'origin',
@@ -83,6 +87,9 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:5174',
     'http://localhost:3000',
 ]
+
+CORS_ALLOW_ALL_HEADERS = True
+
 
 # DATABASE - Railway MySQL using individual environment variables
 DATABASES = {
