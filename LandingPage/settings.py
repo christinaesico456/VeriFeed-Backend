@@ -5,7 +5,6 @@ import pymysql
 pymysql.install_as_MySQLdb()
 
 import os
-import dj_database_url
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
@@ -85,13 +84,20 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
 ]
 
-# DATABASE - Railway MySQL with dj_database_url
+# DATABASE - Railway MySQL using individual environment variables
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL', 'mysql://root:@127.0.0.1:3306/verifeed'),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQLDATABASE', 'verifeed'),
+        'USER': os.environ.get('MYSQLUSER', 'root'),
+        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),
+        'HOST': os.environ.get('MYSQLHOST', '127.0.0.1'),
+        'PORT': os.environ.get('MYSQLPORT', '3306'),
+        'OPTIONS': {
+            "init_command": "SET sql_mode='STRICT_TRANS_TABLES'",
+            "charset": "utf8mb4",
+        },
+    }
 }
 
 # REST FRAMEWORK
