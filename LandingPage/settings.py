@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-e46ibq4nwy%)(*1t_s*e=vi%jit-63b08$15$j634_+z@dpz!d')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# ALLOWED_HOSTS - Railway deployment
+# ALLOWED HOSTS
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -35,22 +35,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
+
     'accounts',
-    'corsheaders',
     'reviews',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-# MIDDLEWARE - WhiteNoise for static files
+# MIDDLEWARE (FIXED — removed duplicate CORS middleware)
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',     # MUST BE FIRST
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -58,40 +59,27 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# CORS CONFIGURATION - Production
+# CORS CONFIGURATION (UPDATED)
 CORS_ALLOWED_ORIGINS = [
-    'https://veri-feed-frontend.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000',
+    "https://veri-feed-frontend.vercel.app",
+    "https://veri-feed-frontend-cmutzr4g-christinaesico456s-projects.vercel.app",
 ]
+
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "authorization",
     "access-control-allow-origin",
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
 ]
 
-# CSRF CONFIGURATION
+# CSRF TRUSTED ORIGINS (UPDATED)
 CSRF_TRUSTED_ORIGINS = [
-    'https://verifeed-backend-production.up.railway.app',
-    "https://veri-feed-frontend.vercel.app",  
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000',
+    "https://veri-feed-frontend.vercel.app",
+    "https://veri-feed-frontend-cmutzr4g-christinaesico456s-projects.vercel.app",
+    "https://verifeed-backend-production.up.railway.app",
 ]
 
-CORS_ALLOW_ALL_HEADERS = True
-
-
-# DATABASE - Railway MySQL using individual environment variables
+# DATABASE - Railway MySQL
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -115,8 +103,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated'
     ],
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
 }
 
 # JWT SETTINGS
@@ -125,22 +111,21 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
 }
 
-# STATIC FILES - WhiteNoise configuration
+# STATIC FILES
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# MEDIA FILES - Railway persistent storage
+# MEDIA FILES
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Ensure media directories exist
 os.makedirs(os.path.join(MEDIA_ROOT, 'profile_pics'), exist_ok=True)
 os.makedirs(os.path.join(MEDIA_ROOT, 'videos'), exist_ok=True)
 
 # FILE UPLOAD SETTINGS
-FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
-DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
 
 # EMAIL CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -153,9 +138,9 @@ DEFAULT_FROM_EMAIL = f'VeriFeed Security <{EMAIL_HOST_USER}>'
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_TIMEOUT = 10
 
-# SECURITY SETTINGS for Production
+# SECURITY SETTINGS
 if not DEBUG:
-    SECURE_SSL_REDIRECT = False  # Set to True if SSL is configured
+    SECURE_SSL_REDIRECT = False
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     SECURE_BROWSER_XSS_FILTER = True
@@ -182,23 +167,12 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'INFO',
     },
-    'loggers': {
-        'accounts': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        'django.core.mail': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-    },
 }
 
 # OTHER SETTINGS
 ROOT_URLCONF = 'LandingPage.urls'
 WSGI_APPLICATION = 'LandingPage.wsgi.application'
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', 'OPTIONS': {'min_length': 8}},
