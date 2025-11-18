@@ -61,12 +61,7 @@ MIDDLEWARE = [
 
 # CORS CONFIGURATION (UPDATED)
 CORS_ALLOWED_ORIGINS = [
-    'https://veri-feed-frontend.vercel.app',
-    'https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app',
-    'https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000',
+    "https://veri-feed-frontend.vercel.app",
 ]
 
 
@@ -77,17 +72,15 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
     "access-control-allow-origin",
 ]
 
-# CSRF TRUSTED ORIGINS (UPDATED)
 # CSRF CONFIGURATION
 CSRF_TRUSTED_ORIGINS = [
-    'https://verifeed-backend-production.up.railway.app',
-    'https://veri-feed-frontend.vercel.app',
-    'https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app',
-    'https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app',
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'http://localhost:3000',
+    "https://veri-feed-frontend.vercel.app",
+    "https://verifeed-backend-production.up.railway.app",
 ]
+
+CORS_ALLOW_ALL_HEADERS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
 
 
 # DATABASE - Railway MySQL
