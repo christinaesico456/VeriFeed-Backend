@@ -61,12 +61,12 @@ MIDDLEWARE = [
 
 # CORS CONFIGURATION (UPDATED)
 CORS_ALLOWED_ORIGINS = [
-    "https://veri-feed-frontend.vercel.app",
-    "https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app",
-    "https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:3000",
+    'https://veri-feed-frontend.vercel.app',
+    'https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app',
+    'https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
 ]
 
 
@@ -78,14 +78,15 @@ CORS_ALLOW_HEADERS = list(default_headers) + [
 ]
 
 # CSRF TRUSTED ORIGINS (UPDATED)
+# CSRF CONFIGURATION
 CSRF_TRUSTED_ORIGINS = [
-    "https://verifeed-backend-production.up.railway.app",
-    "https://veri-feed-frontend.vercel.app",
-    "https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app",
-    "https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:3000",
+    'https://verifeed-backend-production.up.railway.app',
+    'https://veri-feed-frontend.vercel.app',
+    'https://veri-feed-frontend-git-main-christinaesico456s-projects.vercel.app',
+    'https://veri-feed-frontend-cmtuzr14g-christinaesico456s-projects.vercel.app',
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
 ]
 
 
