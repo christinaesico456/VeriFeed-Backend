@@ -80,6 +80,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://verifeed-backend-production.up.railway.app",
 ]
 
+CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_ALL_HEADERS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
