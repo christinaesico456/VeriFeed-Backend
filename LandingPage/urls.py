@@ -4,11 +4,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from .debug_views import check_media_files
+
 
 router = DefaultRouter()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('debug/media/', check_media_files),
     path('api/accounts/', include('accounts.urls')),
     path('api/', include('reviews.urls')), 
     path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
