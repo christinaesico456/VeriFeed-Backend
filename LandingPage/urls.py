@@ -16,7 +16,7 @@ urlpatterns = [
 ]
 
 # Serve media files (temporary solution for Railway)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # Serve static files in development only
 if settings.DEBUG:

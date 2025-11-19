@@ -126,6 +126,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# WHITENOISE SETTINGS
+WHITENOISE_AUTOREFRESH = True  # Only for media files
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_ROOT = MEDIA_ROOT
+
 os.makedirs(os.path.join(MEDIA_ROOT, 'profile_pics'), exist_ok=True)
 os.makedirs(os.path.join(MEDIA_ROOT, 'videos'), exist_ok=True)
 
