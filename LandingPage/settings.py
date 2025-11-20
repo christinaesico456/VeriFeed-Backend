@@ -155,7 +155,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False  
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER", "verifeedofficial@gmail.com")
-SERVER_EMAIL = os.getenv("EMAIL_HOST_USER", "verifeedofficial@gmail.com")
+SERVER_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "verifeedofficial@gmail.com")
 EMAIL_USE_LOCALTIME = False
 EMAIL_TIMEOUT = 60
 
