@@ -46,9 +46,9 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-# MIDDLEWARE (FIXED — removed duplicate CORS middleware)
+# MIDDLEWARE 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',     # MUST BE FIRST
+    'corsheaders.middleware.CorsMiddleware',   
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -70,9 +70,15 @@ CORS_ALLOWED_ORIGINS = [
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_HEADERS = list(default_headers) + [
-    "authorization",
-    "access-control-allow-origin",
-    "content-type",
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 # CSRF CONFIGURATION
@@ -81,7 +87,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://verifeed-backend-production.up.railway.app",
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_ALL_HEADERS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"]
