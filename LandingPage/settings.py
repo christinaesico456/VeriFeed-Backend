@@ -72,6 +72,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = list(default_headers) + [
     "authorization",
     "access-control-allow-origin",
+    "content-type",
 ]
 
 # CSRF CONFIGURATION
@@ -141,16 +142,16 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
 
 # EMAIL CONFIGURATION
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = (os.getenv("EMAIL_HOST", "smtp.gmail.com"))
+EMAIL_HOST = (os.getenv("EMAIL_HOST", "smtp.sendgrid.net"))
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "apikey")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False  
 DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER", "verifeedofficial@gmail.com")
 SERVER_EMAIL = os.getenv("EMAIL_HOST_USER", "verifeedofficial@gmail.com")
 EMAIL_USE_LOCALTIME = False
-EMAIL_TIMEOUT = 30
+EMAIL_TIMEOUT = 60
 
 # SECURITY SETTINGS
 if not DEBUG:
