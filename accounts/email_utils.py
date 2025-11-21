@@ -10,7 +10,7 @@ def send_otp_email(user, otp_code, purpose='login'):
     """
     try:
         from sendgrid import SendGridAPIClient
-        from sendgrid.helpers.mail import Mail, Email, To, Content
+        from sendgrid.helpers.mail import Mail, Email, To, Content, Header
         
         # Purpose-specific messaging
         purpose_messages = {
@@ -182,10 +182,12 @@ This is an automated security message. Please do not reply to this email.
             html_content=Content("text/html", html_content)
         )
         
-        # ✅ FIX 5: Add anti-spam headers
-        message.add_header('X-Priority', '1')
-        message.add_header('X-MSMail-Priority', 'High')
-        message.add_header('Importance', 'High')
+        # ✅ FIX 5: Add anti-spam headers (CORRECTED SYNTAX)
+        message.header = [
+            Header('X-Priority', '1'),
+            Header('X-MSMail-Priority', 'High'),
+            Header('Importance', 'High')
+        ]
         
         # Send via SendGrid
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
@@ -264,7 +266,7 @@ Copyright 2025 VeriFeed. All rights reserved.
                             <!-- Info box -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="padding: 15px; background-color: #EFF6FF; border-left: 4px solid: #3B82F6; text-align: left;">
+                                    <td style="padding: 15px; background-color: #EFF6FF; border-left: 4px solid #3B82F6; text-align: left;">
                                         <p style="margin: 0; color: #1F2937; font-size: 13px; line-height: 1.5;">
                                             If this was not you, please contact us immediately at 
                                             <a href="mailto:verifeedofficial@gmail.com" style="color: #4F46E5; text-decoration: none;">verifeedofficial@gmail.com</a>
