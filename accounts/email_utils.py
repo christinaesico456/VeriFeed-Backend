@@ -17,7 +17,10 @@ def send_otp_email(user, otp_code, purpose='login'):
         from sendgrid import SendGridAPIClient
         from sendgrid.helpers.mail import Mail, Email, To, Content
         
-        # ✅ CRITICAL: Include OTP in subject (anti-spam best practice)
+        # Debug logging
+        logger.info(f"🔍 Starting OTP email send for {user.email}, purpose: {purpose}")
+        
+        # Include OTP in subject (anti-spam best practice)
         subject_map = {
             'login': f'Your VeriFeed Login Code: {otp_code}',
             'signup': f'Welcome to VeriFeed - Verification Code: {otp_code}',
@@ -49,7 +52,6 @@ def send_otp_email(user, otp_code, purpose='login'):
         
         purpose_info = purpose_messages.get(purpose, purpose_messages['login'])
         
-        # ✅ IMPROVED: Plain text version matching HTML structure
         text_content = f"""
 {purpose_info['greeting']}
 
@@ -69,7 +71,6 @@ VeriFeed - Deepfake Detection for Facebook
 This is an automated message, please do not reply directly to this email.
 """
 
-        # ✅ IMPROVED: Clean design with gradient (matches original)
         html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -189,7 +190,7 @@ This is an automated message, please do not reply directly to this email.
             html_content=Content("text/html", html_content)
         )
         
-        # ✅ Add custom headers for spam prevention (SendGrid format)
+        # Add custom headers for spam prevention (SendGrid format)
         message.add_header('X-Entity-Ref-ID', f'verifeed-otp-{purpose}-{user.id}')
         message.add_header('X-Priority', '1')
         message.add_header('Importance', 'high')
