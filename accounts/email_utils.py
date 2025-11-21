@@ -10,7 +10,7 @@ def send_otp_email(user, otp_code, purpose='login'):
     """
     try:
         from sendgrid import SendGridAPIClient
-        from sendgrid.helpers.mail import Mail, Email, To, Content, Header
+        from sendgrid.helpers.mail import Mail, Email, To, Content
         
         # Purpose-specific messaging
         purpose_messages = {
@@ -36,7 +36,6 @@ def send_otp_email(user, otp_code, purpose='login'):
         
         purpose_info = purpose_messages.get(purpose, purpose_messages['login'])
         
-        # ✅ Remove OTP from subject line (spam trigger)
         subject_map = {
             'login': 'VeriFeed Login Verification',
             'signup': 'Welcome to VeriFeed - Verify Your Email',
@@ -44,7 +43,6 @@ def send_otp_email(user, otp_code, purpose='login'):
         }
         subject = subject_map.get(purpose, 'VeriFeed Security Verification')
         
-        # ✅Improved plain text version (must closely match HTML)
         text_content = f"""
 {purpose_info['greeting']}
 
@@ -65,7 +63,6 @@ VeriFeed - Deepfake Detection for Facebook
 This is an automated security message. Please do not reply to this email.
 """
 
-        #  Spam-optimized HTML (removed excessive gradients, emojis)
         html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -80,7 +77,6 @@ This is an automated security message. Please do not reply to this email.
             <td style="padding: 20px 10px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; border: 1px solid #dddddd;">
                     
-                    <!-- Header -->
                     <tr>
                         <td style="background-color: #4F46E5; padding: 30px 40px; text-align: center;">
                             <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: bold;">
@@ -92,7 +88,6 @@ This is an automated security message. Please do not reply to this email.
                         </td>
                     </tr>
                     
-                    <!-- Body -->
                     <tr>
                         <td style="padding: 40px;">
                             <p style="margin: 0 0 10px 0; color: #333333; font-size: 16px; font-weight: bold;">
@@ -103,7 +98,6 @@ This is an automated security message. Please do not reply to this email.
                                 {purpose_info['message']}
                             </p>
                             
-                            <!-- OTP Code Box -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 30px 0;">
                                 <tr>
                                     <td style="padding: 20px; background-color: #F3F4F6; border: 2px solid #4F46E5; text-align: center;">
@@ -120,7 +114,6 @@ This is an automated security message. Please do not reply to this email.
                                 </tr>
                             </table>
                             
-                            <!-- Security Notice -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 20px 0;">
                                 <tr>
                                     <td style="padding: 15px; background-color: #FEF3C7; border-left: 4px solid #F59E0B;">
@@ -138,7 +131,6 @@ This is an automated security message. Please do not reply to this email.
                         </td>
                     </tr>
                     
-                    <!-- Footer -->
                     <tr>
                         <td style="padding: 20px 40px; background-color: #F9FAFB; border-top: 1px solid #E5E7EB; text-align: center;">
                             <p style="margin: 0 0 5px 0; color: #333333; font-size: 14px; font-weight: bold;">
@@ -155,7 +147,6 @@ This is an automated security message. Please do not reply to this email.
                     
                 </table>
                 
-                <!-- Disclaimer -->
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 15px auto 0 auto;">
                     <tr>
                         <td style="text-align: center; padding: 0 20px;">
@@ -173,7 +164,6 @@ This is an automated security message. Please do not reply to this email.
 </html>
 """
         
-        # Add proper email headers to improve deliverability
         message = Mail(
             from_email=Email('verifeedofficial@gmail.com', 'VeriFeed Security'),
             to_emails=To(user.email),
@@ -182,15 +172,14 @@ This is an automated security message. Please do not reply to this email.
             html_content=Content("text/html", html_content)
         )
         
-        # Send via SendGrid
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
         response = sg.send(message)
         
-        logger.info(f"✅ OTP email sent via SendGrid to {user.email} (status: {response.status_code})")
+        logger.info(f"OTP email sent via SendGrid to {user.email} (status: {response.status_code})")
         return True
         
     except Exception as e:
-        logger.error(f"❌ Failed to send OTP email via SendGrid to {user.email}: {str(e)}")
+        logger.error(f"Failed to send OTP email via SendGrid to {user.email}: {str(e)}")
         return False
 
 
@@ -232,7 +221,6 @@ Copyright 2025 VeriFeed. All rights reserved.
         <tr>
             <td style="padding: 20px 10px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; border: 1px solid #dddddd;">
-                    <!-- Header -->
                     <tr>
                         <td style="background-color: #4F46E5; padding: 30px 40px; text-align: center;">
                             <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: bold;">
@@ -241,11 +229,10 @@ Copyright 2025 VeriFeed. All rights reserved.
                         </td>
                     </tr>
                     
-                    <!-- Body -->
                     <tr>
                         <td style="padding: 40px; text-align: center;">
-                            <div style="width: 60px; height: 60px; background-color: #10B981; border-radius: 50%; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center;">
-                                <p style="margin: 0; color: #ffffff; font-size: 30px; line-height: 60px;">✓</p>
+                            <div style="width: 60px; height: 60px; background-color: #10B981; border-radius: 50%; margin: 0 auto 20px auto;">
+                                <p style="margin: 0; color: #ffffff; font-size: 30px; line-height: 60px;">&#10003;</p>
                             </div>
                             
                             <h2 style="margin: 0 0 15px 0; color: #1F2937; font-size: 22px; font-weight: bold;">
@@ -256,7 +243,6 @@ Copyright 2025 VeriFeed. All rights reserved.
                                 Hello <strong>{user.username}</strong>, your account was successfully {'accessed' if purpose == 'login' else 'verified and activated'}.
                             </p>
                             
-                            <!-- Info box -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
                                     <td style="padding: 15px; background-color: #EFF6FF; border-left: 4px solid #3B82F6; text-align: left;">
@@ -270,7 +256,6 @@ Copyright 2025 VeriFeed. All rights reserved.
                         </td>
                     </tr>
                     
-                    <!-- Footer -->
                     <tr>
                         <td style="padding: 20px 40px; background-color: #F9FAFB; border-top: 1px solid #E5E7EB; text-align: center;">
                             <p style="margin: 0 0 5px 0; color: #333333; font-size: 14px; font-weight: bold;">
@@ -306,5 +291,5 @@ Copyright 2025 VeriFeed. All rights reserved.
         return True
         
     except Exception as e:
-        logger.error(f"❌ Failed to send success notification to {user.email}: {str(e)}")
+        logger.error(f"Failed to send success notification to {user.email}: {str(e)}")
         return False
