@@ -84,10 +84,7 @@ This is an automated message, please do not reply directly to this email.
     <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc;">
         <tr>
             <td style="padding: 40px 20px;">
-                <!-- Main container -->
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    
-                    <!-- Header with gradient -->
                     <tr>
                         <td style="background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #ec4899 100%); padding: 36px 40px; text-align: center; border-radius: 12px 12px 0 0;">
                             <h1 style="margin: 0 0 12px 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
@@ -100,19 +97,14 @@ This is an automated message, please do not reply directly to this email.
                             </div>
                         </td>
                     </tr>
-                    
-                    <!-- Body -->
                     <tr>
                         <td style="padding: 40px 40px 32px 40px;">
                             <p style="margin: 0 0 8px 0; color: #111827; font-size: 18px; line-height: 26px; font-weight: 600;">
                                 {purpose_info['greeting']}
                             </p>
-                            
                             <p style="margin: 0 0 32px 0; color: #6b7280; font-size: 15px; line-height: 22px;">
                                 {purpose_info['message']}
                             </p>
-                            
-                            <!-- OTP Code Box -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 32px 0;">
                                 <tr>
                                     <td style="padding: 28px 24px; background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 50%, #fdf2f8 100%); border: 2px solid; border-image: linear-gradient(135deg, #60a5fa, #a78bfa, #ec4899) 1; border-radius: 10px; text-align: center;">
@@ -128,8 +120,6 @@ This is an automated message, please do not reply directly to this email.
                                     </td>
                                 </tr>
                             </table>
-                            
-                            <!-- Security Notice -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 24px 0;">
                                 <tr>
                                     <td style="padding: 14px 16px; background-color: #fef3c7; border-left: 3px solid #f59e0b; border-radius: 6px;">
@@ -139,32 +129,20 @@ This is an automated message, please do not reply directly to this email.
                                     </td>
                                 </tr>
                             </table>
-                            
                             <p style="margin: 0; color: #6b7280; font-size: 14px; line-height: 20px;">
                                 If you didn't request this code, please ignore this email or contact us at
                                 <a href="mailto:verifeedofficial@gmail.com" style="color: #a78bfa; text-decoration: none; font-weight: 600;">verifeedofficial@gmail.com</a>
                             </p>
                         </td>
                     </tr>
-                    
-                    <!-- Footer -->
                     <tr>
                         <td style="padding: 24px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; border-radius: 0 0 12px 12px; text-align: center;">
-                            <p style="margin: 0 0 6px 0; color: #374151; font-size: 13px; font-weight: 600;">
-                                VeriFeed
-                            </p>
-                            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">
-                                Deepfake Detection for Facebook
-                            </p>
-                            <p style="margin: 0; color: #9ca3af; font-size: 11px;">
-                                © 2025 VeriFeed. All rights reserved.
-                            </p>
+                            <p style="margin: 0 0 6px 0; color: #374151; font-size: 13px; font-weight: 600;">VeriFeed</p>
+                            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">Deepfake Detection for Facebook</p>
+                            <p style="margin: 0; color: #9ca3af; font-size: 11px;">© 2025 VeriFeed. All rights reserved.</p>
                         </td>
                     </tr>
-                    
                 </table>
-                
-                <!-- Small disclaimer -->
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 16px auto 0 auto;">
                     <tr>
                         <td style="text-align: center; padding: 0 20px;">
@@ -174,7 +152,6 @@ This is an automated message, please do not reply directly to this email.
                         </td>
                     </tr>
                 </table>
-                
             </td>
         </tr>
     </table>
@@ -190,15 +167,10 @@ This is an automated message, please do not reply directly to this email.
             html_content=Content("text/html", html_content)
         )
         
-        # Add custom headers for spam prevention (SendGrid format)
-        message.add_header('X-Entity-Ref-ID', f'verifeed-otp-{purpose}-{user.id}')
-        message.add_header('X-Priority', '1')
-        message.add_header('Importance', 'high')
-        
-        # Get API key
-        api_key = os.environ.get('SENDGRID_API_KEY')
+        # Get API key from EMAIL_HOST_PASSWORD (Railway variable)
+        api_key = os.environ.get('EMAIL_HOST_PASSWORD')
         if not api_key:
-            logger.error("SENDGRID_API_KEY not found in environment variables")
+            logger.error("EMAIL_HOST_PASSWORD (SendGrid API key) not found in environment variables")
             return False
             
         sg = SendGridAPIClient(api_key)
@@ -215,10 +187,6 @@ This is an automated message, please do not reply directly to this email.
 def send_otp_success_notification(user, purpose='login'):
     """
     Notify user that OTP verification was successful.
-    
-    Args:
-        user: CustomUser instance
-        purpose: 'login' or 'signup'
     """
     try:
         from sendgrid import SendGridAPIClient
@@ -231,97 +199,18 @@ Hello {user.username},
 
 Your account was successfully {'accessed' if purpose == 'login' else 'verified and activated'}.
 
-If this wasn't you, please secure your account immediately by:
-1. Changing your password
-2. Enabling two-factor authentication
-3. Contacting our support team at verifeedofficial@gmail.com
+If this wasn't you, please contact verifeedofficial@gmail.com
 
 Best regards,
 The VeriFeed Team
-
----
-VeriFeed - Deepfake Detection for Facebook
-© 2025 VeriFeed. All rights reserved.
 """
         
         html_content = f"""
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{subject}</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background-color: #f8fafc;">
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background-color: #f8fafc;">
-        <tr>
-            <td style="padding: 40px 20px;">
-                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="margin: 0 auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                    <!-- Header -->
-                    <tr>
-                        <td style="background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #ec4899 100%); padding: 36px 40px; text-align: center; border-radius: 12px 12px 0 0;">
-                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700; letter-spacing: -0.5px;">
-                                VeriFeed
-                            </h1>
-                        </td>
-                    </tr>
-                    
-                    <!-- Body -->
-                    <tr>
-                        <td style="padding: 48px 40px; text-align: center;">
-                            <!-- Success Icon -->
-                            <div style="display: inline-block; width: 64px; height: 64px; background-color: #10b981; border-radius: 50%; margin-bottom: 20px;">
-                                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" height="100%">
-                                    <tr>
-                                        <td style="text-align: center; vertical-align: middle;">
-                                            <span style="color: #ffffff; font-size: 32px; font-weight: bold;">✓</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            
-                            <h2 style="margin: 0 0 12px 0; color: #111827; font-size: 24px; font-weight: 700;">
-                                {'Login Successful' if purpose == 'login' else 'Account Activated'}
-                            </h2>
-                            
-                            <p style="margin: 0 0 32px 0; color: #6b7280; font-size: 15px; line-height: 22px;">
-                                Hello <strong style="color: #374151;">{user.username}</strong>, your account was successfully {'accessed' if purpose == 'login' else 'verified and activated'}.
-                            </p>
-                            
-                            <!-- Info box -->
-                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                <tr>
-                                    <td style="padding: 14px 16px; background-color: #eff6ff; border-left: 3px solid #60a5fa; border-radius: 6px; text-align: left;">
-                                        <p style="margin: 0; color: #6b7280; font-size: 13px; line-height: 18px;">
-                                            If this wasn't you, please contact us immediately at
-                                            <a href="mailto:verifeedofficial@gmail.com" style="color: #a78bfa; text-decoration: none; font-weight: 600;">verifeedofficial@gmail.com</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    
-                    <!-- Footer -->
-                    <tr>
-                        <td style="padding: 24px 40px; background-color: #f9fafb; border-top: 1px solid #e5e7eb; border-radius: 0 0 12px 12px; text-align: center;">
-                            <p style="margin: 0 0 6px 0; color: #374151; font-size: 13px; font-weight: 600;">
-                                VeriFeed
-                            </p>
-                            <p style="margin: 0 0 4px 0; color: #6b7280; font-size: 12px;">
-                                Deepfake Detection for Facebook
-                            </p>
-                            <p style="margin: 0; color: #9ca3af; font-size: 11px;">
-                                © 2025 VeriFeed. All rights reserved.
-                            </p>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
+<html><body style="font-family: Arial, sans-serif; padding: 20px;">
+<h2>{'Login Successful' if purpose == 'login' else 'Account Activated'}</h2>
+<p>Hello {user.username}, your account was successfully {'accessed' if purpose == 'login' else 'verified'}.</p>
+</body></html>
 """
         
         message = Mail(
@@ -332,17 +221,16 @@ VeriFeed - Deepfake Detection for Facebook
             html_content=Content("text/html", html_content)
         )
         
-        api_key = os.environ.get('SENDGRID_API_KEY')
+        api_key = os.environ.get('EMAIL_HOST_PASSWORD')
         if not api_key:
-            logger.error("SENDGRID_API_KEY not found in environment variables")
             return False
             
         sg = SendGridAPIClient(api_key)
         response = sg.send(message)
         
-        logger.info(f"✅ Success notification sent to {user.email} (status: {response.status_code})")
+        logger.info(f"✅ Success notification sent to {user.email}")
         return True
         
     except Exception as e:
-        logger.error(f"❌ Failed to send success notification to {user.email}: {str(e)}")
+        logger.error(f"❌ Failed to send success notification: {str(e)}")
         return False
