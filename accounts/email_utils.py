@@ -36,7 +36,7 @@ def send_otp_email(user, otp_code, purpose='login'):
         
         purpose_info = purpose_messages.get(purpose, purpose_messages['login'])
         
-        # ✅ FIX 1: Remove OTP from subject line (spam trigger)
+        # ✅ Remove OTP from subject line (spam trigger)
         subject_map = {
             'login': 'VeriFeed Login Verification',
             'signup': 'Welcome to VeriFeed - Verify Your Email',
@@ -44,7 +44,7 @@ def send_otp_email(user, otp_code, purpose='login'):
         }
         subject = subject_map.get(purpose, 'VeriFeed Security Verification')
         
-        # ✅ FIX 2: Improved plain text version (must closely match HTML)
+        # ✅Improved plain text version (must closely match HTML)
         text_content = f"""
 {purpose_info['greeting']}
 
@@ -65,7 +65,7 @@ VeriFeed - Deepfake Detection for Facebook
 This is an automated security message. Please do not reply to this email.
 """
 
-        # ✅ FIX 3: Spam-optimized HTML (removed excessive gradients, emojis)
+        #  Spam-optimized HTML (removed excessive gradients, emojis)
         html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
@@ -173,7 +173,7 @@ This is an automated security message. Please do not reply to this email.
 </html>
 """
         
-        # ✅ FIX 4: Add proper email headers to improve deliverability
+        # Add proper email headers to improve deliverability
         message = Mail(
             from_email=Email('verifeedofficial@gmail.com', 'VeriFeed Security'),
             to_emails=To(user.email),
@@ -181,13 +181,6 @@ This is an automated security message. Please do not reply to this email.
             plain_text_content=Content("text/plain", text_content),
             html_content=Content("text/html", html_content)
         )
-        
-        # ✅ FIX 5: Add anti-spam headers (CORRECTED SYNTAX)
-        message.header = [
-            Header('X-Priority', '1'),
-            Header('X-MSMail-Priority', 'High'),
-            Header('Importance', 'High')
-        ]
         
         # Send via SendGrid
         sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
