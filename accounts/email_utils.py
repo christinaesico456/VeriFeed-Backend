@@ -189,14 +189,18 @@ This is an automated message, please do not reply directly to this email.
             html_content=Content("text/html", html_content)
         )
         
-        # ✅ Add custom headers for spam prevention
-        message.header = {
-            'X-Entity-Ref-ID': f'verifeed-otp-{purpose}-{user.id}',
-            'X-Priority': '1',
-            'Importance': 'high',
-        }
+        # ✅ Add custom headers for spam prevention (SendGrid format)
+        message.add_header('X-Entity-Ref-ID', f'verifeed-otp-{purpose}-{user.id}')
+        message.add_header('X-Priority', '1')
+        message.add_header('Importance', 'high')
         
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        # Get API key
+        api_key = os.environ.get('SENDGRID_API_KEY')
+        if not api_key:
+            logger.error("SENDGRID_API_KEY not found in environment variables")
+            return False
+            
+        sg = SendGridAPIClient(api_key)
         response = sg.send(message)
         
         logger.info(f"✅ OTP email sent via SendGrid to {user.email} (status: {response.status_code})")
@@ -327,9 +331,15 @@ VeriFeed - Deepfake Detection for Facebook
             html_content=Content("text/html", html_content)
         )
         
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        api_key = os.environ.get('SENDGRID_API_KEY')
+        if not api_key:
+            logger.error("SENDGRID_API_KEY not found in environment variables")
+            return False
+            
+        sg = SendGridAPIClient(api_key)
         response = sg.send(message)
         
+        logger.info(f"✅ Success notification sent to {user.email} (status: {response.status_code})")
         return True
         
     except Exception as e:
