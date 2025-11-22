@@ -163,17 +163,8 @@ To unsubscribe, email: verifeedofficial@gmail.com with subject "unsubscribe"
             html_content=Content("text/html", html_content)
         )
         
-        # Add reply-to
+        # Add reply-to email
         message.reply_to = Email('verifeedofficial@gmail.com', 'VeriFeed Support')
-        
-        # Add anti-spam headers
-        message.header = {
-            'X-Priority': '1',
-            'X-MSMail-Priority': 'High',
-            'Importance': 'high',
-            'List-Unsubscribe': '<mailto:verifeedofficial@gmail.com?subject=unsubscribe>',
-            'X-Entity-Ref-ID': f'verifeed-otp-{purpose}-{user.id}',
-        }
         
         # Get API key from EMAIL_HOST_PASSWORD (Railway variable)
         api_key = os.environ.get('EMAIL_HOST_PASSWORD')
@@ -302,10 +293,6 @@ To unsubscribe, email: verifeedofficial@gmail.com with subject "unsubscribe"
         )
         
         message.reply_to = Email('verifeedofficial@gmail.com', 'VeriFeed Support')
-        
-        message.header = {
-            'List-Unsubscribe': '<mailto:verifeedofficial@gmail.com?subject=unsubscribe>',
-        }
         
         api_key = os.environ.get('EMAIL_HOST_PASSWORD')
         if not api_key:
